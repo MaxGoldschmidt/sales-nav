@@ -1,5 +1,5 @@
 # Sales Nav RESTful API
-> ### Node (Express) app providing an API to generate Opportunities given a list of sales reps and companies. The API matches companies and sales reps with the aim of reducing distance between each company and sales rep.
+> ### Node (Express) app providing an API to generate Opportunities from a list of sales reps and companies. The API matches companies and sales reps with the aim of reducing distance between each company and sales rep.
 
 # Getting started
 ## To get the Node server running locally:
@@ -26,9 +26,9 @@ npm run dev
 
 ## Application Structure
 
-- `app.js` - The entry point to our application. This file defines our express server. It also requires the routes we'll be using in the application.
-- `data/` - This folder contains test data for our unit tests.
-- `routes/` - This folder contains the route definitions for our API.
+- `app.js` - The entry point to the application. This file defines the express server. It also requires the routes we'll be using in the application.
+- `data/` - This folder contains test data for the unit tests.
+- `routes/` - This folder contains the route definitions for the API.
 - `helpers/` - This folder contains the core functionality of the end points
 
 # REST API
@@ -48,9 +48,7 @@ curl -i -H 'Accept: application/json' http://localhost:3000/opportunities/
 HTTP/1.1 200 OK
 Date: Sun, 16 Feb 2020 12:36:30 GMT
 Status: 200 OK
-Connection: close
 Content-Type: application/json
-Content-Length: 2
 
 Body:
 [

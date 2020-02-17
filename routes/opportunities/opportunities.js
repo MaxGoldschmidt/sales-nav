@@ -1,7 +1,7 @@
 const express = require('express');
-const COMPANIES = require('../data/companies.json');
-const SALES_REPS = require('../data/sales-reps.json');
-const { generateOpportunities } = require('../helpers/opportunityGenerator/opportunityGenerator');
+const COMPANIES = require('../../data/companies.json');
+const SALES_REPS = require('../../data/sales-reps.json');
+const { generateOpportunities } = require('../../helpers/opportunityGenerator/opportunityGenerator');
 
 const router = express.Router();
 
