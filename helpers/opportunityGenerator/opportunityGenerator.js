@@ -3,33 +3,10 @@ const { haversineDistance } = require('../haversineDistanceCalculator/haversineD
 /*
   A class that can match a list of companies
   to their nearest sales rep, based on geo-location coordinates
+
+  Since, I'm assuming that in a real-world application this is pulling data from a database,
+  I can assume that we know the object structure of the companies and sales reps
 */
-
-
-/**
- * @param {object} company
- * @param {object} salesRep
- */
-const calculateCompanyRepDistance = (company, salesRep) => {
-  const companyLocation = [company.LATITUDE, company.LONGITUDE];
-  const salesRepLocation = salesRep.location.split(','); // in database salesRep.location = "36.137178, -79.442645"
-  return haversineDistance(companyLocation, salesRepLocation);
-};
-
-/**
- * @param {object} company
- * @param {object[]} salesReps - The list of salesReps
- */
-const findNearestSalesRep = (company, salesReps) => {
-  const salesRepsWithDistance = salesReps.map((salesRep) => ({
-    ...salesRep,
-    distance: calculateCompanyRepDistance(company, salesRep),
-  }));
-  const repsSortedByDistance = salesRepsWithDistance.sort(
-    (a, b) => a.distance - b.distance,
-  );
-  return repsSortedByDistance[0]; // only return closes sales rep
-};
 
 /**
  * returns array of opportunities. Each opportunity contains a Company and their matched sales rep
@@ -59,6 +36,7 @@ const generateOpportunities = (companies, salesReps) => {
         },
       },
     });
+
     // remove assigned rep from available salesRep array so that they won't be assigned twice.
     availableSalesReps = availableSalesReps.filter(
       (availableSalesRep) => availableSalesRep.email !== nearestSalesRep.email,
@@ -66,6 +44,31 @@ const generateOpportunities = (companies, salesReps) => {
   });
 
   return opportunities;
+};
+
+/**
+ * @param {object} company
+ * @param {object[]} salesReps - The list of salesReps
+ */
+const findNearestSalesRep = (company, salesReps) => {
+  const salesRepsWithDistance = salesReps.map((salesRep) => ({
+    ...salesRep,
+    distance: calculateCompanyRepDistance(company, salesRep),
+  }));
+  const repsSortedByDistance = salesRepsWithDistance.sort(
+    (a, b) => a.distance - b.distance,
+  );
+  return repsSortedByDistance[0]; // only return closes sales rep
+};
+
+/**
+ * @param {object} company
+ * @param {object} salesRep
+ */
+const calculateCompanyRepDistance = (company, salesRep) => {
+  const companyLocation = [company.LATITUDE, company.LONGITUDE];
+  const salesRepLocation = salesRep.location.split(','); // in data salesRep.location = "36.137178, -79.442645"
+  return haversineDistance(companyLocation, salesRepLocation);
 };
 
 exports.generateOpportunities = generateOpportunities;

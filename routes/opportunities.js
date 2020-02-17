@@ -7,8 +7,12 @@ const router = express.Router();
 
 /* GET opportunities. */
 router.get('/', (req, res) => {
-  const opportunities = generateOpportunities(COMPANIES, SALES_REPS);
-  res.status(200).json(opportunities);
+  try {
+    const opportunities = generateOpportunities(COMPANIES, SALES_REPS);
+    res.status(200).json(opportunities);
+  } catch (error) {
+    res.status(500).send('An internal error has occurred');
+  }
 });
 
 module.exports = router;

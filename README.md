@@ -12,12 +12,17 @@
 ````
 npm run tests
 ````
+## To run with nodemon
+````
+npm run dev
+````
 
 # Code Overview
 ## Dependencies
 - [express](https://www.npmjs.com/package/express) - The server for handling and routing HTTP requests
 - [morgan](https://github.com/expressjs/morgan) - For logging to the console
 - [http-errors](https://www.npmjs.com/package/http-errors) - To generate simple http error pages
+- [nodemon](https://nodemon.io/) - To handle reloading the server on file changes in development
 
 ## Application Structure
 
