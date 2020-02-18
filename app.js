@@ -1,7 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const logger = require('morgan');
 
 const opportunitiesRouter = require('./routes/opportunities/opportunities');
